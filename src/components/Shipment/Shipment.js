@@ -18,9 +18,9 @@ const Shipment = () => {
         <input name="email" defaultValue={loggedInUser.email} ref={register({ required: true })} placeholder="Your Email" />
         {errors.email && <span className="error">Email is required@</span>}
         <input name="address" ref={register({ required: true })} placeholder="Address" />
-        {errors.address && <span className="error">Address is required</span>}
+        {errors.address && <span className="error">Address is required!</span>}
         <input name="phone" ref={register({ required: true })} placeholder="Phone Number" />
-        {errors.phone && <span className="error">Phone is required</span>}
+        {errors.phone && <span className="error">Phone is required!</span>}
         <input type="submit" />
       </form>
     );
