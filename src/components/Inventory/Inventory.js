@@ -1,10 +1,19 @@
 import React from 'react';
-import Header from '../Header/Header';
+import fakeData from '../../fakeData';
 
 const Inventory = () => {
+    const handleAddProduct = () => {
+        fetch("http://localhost:4000/addProduct", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({fakeData})
+        })
+    }
     return (
         <div>
-            <h2>Developer Is Sleeping!!!!!!</h2>
+            <button onClick={handleAddProduct}>Add Product</button>
         </div>
     );
 };
