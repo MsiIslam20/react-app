@@ -8,7 +8,7 @@ const Inventory = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({fakeData})
+            body: JSON.stringify(fakeData)
         })
     }
     return (
