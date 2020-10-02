@@ -22,15 +22,18 @@ const Shop = () => {
         //carts
         const saveCart =  getDatabaseCart();
         const productKeys = Object.keys(saveCart);
-        if(products.length > 0) {
-            const previousCart = productKeys.map(exitingKey => {
-                const product = products.find(product => product.key === exitingKey);
-                product.quantity = saveCart[exitingKey];
-                return product;
-            });
-            setCart(previousCart);
-        }
-    }, [products]);
+        fetch("http://localhost:4000/productByKeys", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(productKeys)
+        })
+        .then(res => res.json())
+        .then(data =>{
+            setCart(data);
+        })
+    }, []);
 
     const handleProduct = (product) => {
         const sameProduct = cart.find(pd => pd.key === product.key);

@@ -28,7 +28,7 @@ const Order = () => {
         //carts
         const saveCart =  getDatabaseCart();
         const productKeys = Object.keys(saveCart);
-        fetch("", {
+        fetch("http://localhost:4000/productByKeys", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

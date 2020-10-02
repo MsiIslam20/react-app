@@ -3,12 +3,14 @@ import { useForm } from 'react-hook-form';
 import './Shipment.css'
 import { useContext } from 'react';
 import { userContext } from '../../App';
+import { getDatabaseCart } from '../../utilities/databaseManager';
 
 const Shipment = () => {
     const [loggedInUser, setLoggedInUser] = useContext(userContext)
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = data => {
-        console.log(data)
+      const savedCart = getDatabaseCart();
+      const orderDetail = {...loggedInUser}
     };
   
     return (
