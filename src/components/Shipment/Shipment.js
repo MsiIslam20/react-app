@@ -10,7 +10,7 @@ const Shipment = () => {
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = data => {
       const savedCart = getDatabaseCart();
-      const orderDetail = {...loggedInUser}
+      const orderDetail = {...loggedInUser, products : savedCart, shipment : data, orderTime : new Date()}
     };
   
     return (
