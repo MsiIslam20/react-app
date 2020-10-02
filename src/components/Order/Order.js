@@ -28,7 +28,7 @@ const Order = () => {
         //carts
         const saveCart =  getDatabaseCart();
         const productKeys = Object.keys(saveCart);
-        fetch("http://localhost:4000/productByKeys", {
+        fetch("https://calm-garden-46705.herokuapp.com/productByKeys", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

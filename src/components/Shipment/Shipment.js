@@ -11,7 +11,7 @@ const Shipment = () => {
     const onSubmit = data => {
       const savedCart = getDatabaseCart();
       const orderDetail = {...loggedInUser, products : savedCart, shipment : data, orderTime : new Date()};
-      fetch("http://localhost:4000/addOrder", { 
+      fetch("https://calm-garden-46705.herokuapp.com/addOrder", { 
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
