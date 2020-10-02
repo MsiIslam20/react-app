@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import './Shipment.css'
 import { useContext } from 'react';
 import { userContext } from '../../App';
-import { getDatabaseCart } from '../../utilities/databaseManager';
+import { getDatabaseCart, processOrder } from '../../utilities/databaseManager';
 
 const Shipment = () => {
     const [loggedInUser, setLoggedInUser] = useContext(userContext)
@@ -11,7 +11,7 @@ const Shipment = () => {
     const onSubmit = data => {
       const savedCart = getDatabaseCart();
       const orderDetail = {...loggedInUser, products : savedCart, shipment : data, orderTime : new Date()};
-      fetch("", { 
+      fetch("http://localhost:4000/addOrder", { 
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -20,7 +20,10 @@ const Shipment = () => {
       })
       .then(res => res.json())
       .then(data =>{
-        
+        if(data){
+          processOrder();
+          alert("Your Order Place Successfully")
+        }
       })
     };
   
