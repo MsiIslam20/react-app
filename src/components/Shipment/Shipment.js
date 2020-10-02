@@ -10,7 +10,18 @@ const Shipment = () => {
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = data => {
       const savedCart = getDatabaseCart();
-      const orderDetail = {...loggedInUser, products : savedCart, shipment : data, orderTime : new Date()}
+      const orderDetail = {...loggedInUser, products : savedCart, shipment : data, orderTime : new Date()};
+      fetch("", { 
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderDetail)
+      })
+      .then(res => res.json())
+      .then(data =>{
+        
+      })
     };
   
     return (
