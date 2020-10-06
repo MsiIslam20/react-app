@@ -22,9 +22,8 @@ export const handleGoogleSignIn = () => {
       }
       return signInUser;
     })
-    .catch(err => console.log(err))
-    
-  }
+    .catch(err => console.log(err))  
+}
 
     //FB logging
 export const handleFBLogIn = () => {
@@ -106,4 +105,4 @@ const updateUserName = name => {
       // An error happened.
     });
 
-  }
+}

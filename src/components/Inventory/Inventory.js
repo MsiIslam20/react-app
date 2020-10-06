@@ -1,10 +1,19 @@
 import React from 'react';
-import Header from '../Header/Header';
+import fakeData from '../../fakeData';
 
 const Inventory = () => {
+    const handleAddProduct = () => {
+        fetch("https://calm-garden-46705.herokuapp.com/addProduct", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(fakeData)
+        })
+    }
     return (
         <div>
-            <h2>Developer Is Sleeping!!!!!!</h2>
+            <button onClick={handleAddProduct}>Add Product</button>
         </div>
     );
 };

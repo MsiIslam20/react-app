@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { getDatabaseCart, removeFromDatabaseCart, processOrder } from '../../utilities/databaseManager';
-import fakeData from '../../fakeData';
 import ReviewItem from '../ReviewItem/ReviewItem';
 import Cart from '../Cart/Cart';
 import happyImage from '../../images/giphy.gif'
-import Header from '../Header/Header';
 import { useHistory } from 'react-router-dom';
 
 const Order = () => {
@@ -30,14 +28,17 @@ const Order = () => {
         //carts
         const saveCart =  getDatabaseCart();
         const productKeys = Object.keys(saveCart);
-        const cartProduct = productKeys.map(key => {
-            const product = fakeData.find(product => product.key === key);
-            product.quantity = saveCart[key];
-            return product;
-        });
-        // console.log(cartProduct);
-        setCart(cartProduct);
-        
+        fetch("https://calm-garden-46705.herokuapp.com/productByKeys", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(productKeys)
+        })
+        .then(res => res.json())
+        .then(data =>{
+            setCart(data);
+        })
     }, [])
     let thanks;
     if(orderPlaced){
@@ -48,7 +49,6 @@ const Order = () => {
             <div className="product-container">
                 <div className="shop-container">
                     <div>
-                        {/* <h3>order item: {cart.length}</h3> */}
                             {
                                 cart.map( pd => <ReviewItem 
                                     key={pd.key}
