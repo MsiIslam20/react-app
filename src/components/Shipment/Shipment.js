@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import './Shipment.css'
 import { useContext } from 'react';
@@ -10,9 +10,22 @@ const Shipment = () => {
 
   const [loggedInUser, setLoggedInUser] = useContext(userContext);
   const { register, handleSubmit, errors } = useForm();
+  const [shippingData, setShippingData] = useState(null);
+
   const onSubmit = data => {
+    setShippingData(data);
+  };
+
+  const handlePaymentSuccess = (paymentId) => {
+
     const savedCart = getDatabaseCart();
-    const orderDetail = { ...loggedInUser, products: savedCart, shipment: data, orderTime: new Date() };
+    const orderDetail = { 
+      ...loggedInUser, 
+      products: savedCart, 
+      shipment: shippingData, 
+      paymentId,
+      orderTime: new Date() 
+    };
     fetch("https://calm-garden-46705.herokuapp.com/addOrder", {
       method: "POST",
       headers: {
@@ -27,11 +40,11 @@ const Shipment = () => {
           alert("Your Order Place Successfully")
         }
       })
-  };
+  }
 
   return (
     <div className="row">
-      <div className="col-md-6">
+      <div style={{display: shippingData ? "none" : "block"}} className="col-md-6">
         <form className="ship-form" onSubmit={handleSubmit(onSubmit)}>
           <input name="Name" defaultValue={loggedInUser.name} ref={register({ required: true })} placeholder="Your Name" />
           {errors.Name && <span className="error">Name is required!</span>}
@@ -44,10 +57,10 @@ const Shipment = () => {
           <input type="submit" />
         </form>
       </div>
-      <div className="col-md-6 pr-4">
-        <h2 className="mb-5">Please Proceed your payment..</h2>
-        <div className="pr-5">
-          <ProcessPayment />
+      <div style={{display: shippingData ? "block" : "none"}} className="col-md-6 pr-4">
+        <h2 className="mb-5 mt-3">Please Proceed your payment..</h2>
+        <div className="pr-5 pl-5">
+          <ProcessPayment handlePaymentSuccess={handlePaymentSuccess}></ProcessPayment>
         </div>
       </div>
     </div>
