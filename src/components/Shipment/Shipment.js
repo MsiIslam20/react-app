@@ -6,7 +6,8 @@ import { userContext } from '../../App';
 import { getDatabaseCart, processOrder } from '../../utilities/databaseManager';
 
 const Shipment = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(userContext)
+  
+    const [loggedInUser, setLoggedInUser] = useContext(userContext);
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = data => {
       const savedCart = getDatabaseCart();
