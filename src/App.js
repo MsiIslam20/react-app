@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 import Order from './components/Order/Order';
 import Inventory from './components/Inventory/Inventory';
