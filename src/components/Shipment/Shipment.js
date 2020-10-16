@@ -46,7 +46,9 @@ const Shipment = () => {
       </div>
       <div className="col-md-6 pr-4">
         <h2 className="mb-5">Please Proceed your payment..</h2>
-        <ProcessPayment />
+        <div className="pr-5">
+          <ProcessPayment />
+        </div>
       </div>
     </div>
   );

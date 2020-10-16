@@ -1,28 +1,14 @@
 import React from 'react';
 import {Elements, CardElement} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
+import CardForm from './CardForm';
 
-const stripePromise = loadStripe('pk_test_JJ1eMdKN0Hp4UFJ6kWXWO4ix00jtXzq5XG');
+const stripePromise = loadStripe('pk_test_51HcqqsF9971vAUQRtKEi3si89Zo2mf2TK74FTvU8N8ZWAZCQ9wkGL0IlHkmWPyZG7kbtjwH6C5hCqHFBRxchMeWY00yx0ZOkFX');
 
 const ProcessPayment = () => {
   return (
     <Elements stripe={stripePromise}>
-        <CardElement
-        options={{
-            style: {
-            base: {
-                fontSize: '16px',
-                color: '#424770',
-                '::placeholder': {
-                color: '#aab7c4',
-                },
-            },
-            invalid: {
-                color: '#9e2146',
-            },
-            },
-        }}
-        />
+        <CardForm></CardForm>
     </Elements>
   );
 };
