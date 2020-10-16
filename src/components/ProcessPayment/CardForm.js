@@ -5,7 +5,8 @@ const CardForm = () => {
   const stripe = useStripe();
   const elements = useElements();
 
-  const [paymentError , setPaymentError] = useState('')
+  const [paymentError , setPaymentError] = useState('');
+  const [paymentSuccess , setPaymentSuccess] = useState('');
 
   const handleSubmit = async (event) => {
     // Block native form submission.
@@ -30,8 +31,10 @@ const CardForm = () => {
 
     if (error) {
         setPaymentError(error.message);
+        setPaymentSuccess(null);
     } else {
-      console.log('[PaymentMethod]', paymentMethod);
+        setPaymentSuccess(paymentMethod.id);
+        setPaymentError(null);
     }
   };
 
@@ -45,6 +48,9 @@ const CardForm = () => {
         </form>
         {
             paymentError && <p style={{color: 'red' , marginTop: '20px'}}>{paymentError}</p>
+        }
+        {
+            paymentSuccess && <p style={{color: 'green' , marginTop: '20px'}}>Payment Successfully Done..!!</p>
         }
       </div>
   );
